@@ -1,4 +1,4 @@
-# Module 1
+# Module 1: Notes
 
 Setting up Docker, using PostgreSQL in Docker, downloading the datasets (diverges from the pre-recorded video lesson), using SQL to get information on the dataset and setting up Terraform.
 
@@ -41,40 +41,10 @@ To upload the data we need to install a few packages in the visrtual enviroment:
 - `sqlalchemy`
 - `psycopg2`
 
-See `upload-data.ipynb` for loading data to the postgres database.
+See [`upload-data.ipynb`](../1_intro_prereqs/code/upload-data.ipynb) for loading data to the postgres database.
 
 
-## Questions
-
-### 1
-Which tag has the following text? - *Automatically remove the container when it exits* 
-
-- [ ] `--delete`
-- [x] `--rc`
-- [ ] `--rmc`
-- [ ] `--rm`
-
-**How to answer:** Run `docker run --help` and read the help text for different flags.
-
-### 2
-1. Run docker with the python:3.9 image in an interactive mode and the entrypoint of bash.
-2. Now check the python modules that are installed ( use ```pip list``` ). 
-
-What is version of the package *wheel* ?
-
-- [x] 0.42.0
-- [ ] 1.0.0
-- [ ] 23.0.1
-- [ ] 58.1.0
-
-**How to answer:** 
-1. Run the container `docker run -it python:3.9` 
-2. It will download if you don't have it, 
-3. You will see you go directly into python so can't use `pip`, so we have to exit it and access bash in that same container.
-4. Run the container again with an entrypoint `docker run -it --entrypoint=bash python:3.9`
-5. Now you can run `pip list wheel`
-
-# Postgres
+## Postgres
 
 Run Postgres and load data as shown in the videos.
 We'll use the green taxi trips from September 2019:
@@ -90,83 +60,91 @@ We will also need the dataset with zones:
 **How complete task:** 
 See jupyter notebook [`upload-data.ipynb`](../1_intro_prereqs/code/upload-data.ipynb)
 
-## Questions 
 
-### 3. Count records 
+## PgAdmin
+```
+docker run -it \
+  -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+  -e PGADMIN_DEFAULT_PASSWORD="root" \
+  -p 8080:80 \
+  dpage/pgadmin4
+```
+[Open PgAdmin](http://localhost:8080/) in the browser.
 
-How many taxi trips were totally made on September 18th 2019?
-
-Tip: started and finished on 2019-09-18. 
-
-Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in the format timestamp (date and hour+min+sec) and not in date.
-
-- [ ] 15767
-- [ ] 15612
-- [ ] 15859
-- [ ] 89009
+To be able to use the new PgAdmin container with our database in the postgres container, they need to be connected. For that we need to put them in the same network, as by default they are isolated. 
 
 
-### 4. Largest trip for each day
+## Put postgres and pgadmin in the same network
 
-Which was the pick up day with the largest trip distance
-Use the pick up time for your calculations.
+1. Create a docker network: `docker network create pg-network`
+2. Add network option when running the container:
+```
+docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v pgdata:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    --network=pg-network \
+    --name pg-database \
+    postgres:13
+```
+3. Run pgadmin in the same network:
+```
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -p 8080:80 \
+    --network=pg-network \
+    dpage/pgadmin4
+```
+We can also put these in a docker compose file, that way we don't have to have two different terminals to run the two commands separately.
 
-- [ ] 2019-09-18
-- [ ] 2019-09-16
-- [ ] 2019-09-26
-- [ ] 2019-09-21
 
+## Ingestion script 
 
-### 5. Three biggest pick up Boroughs
+Instead of manually sending data to postgres from the jupyter notebook, we can use a python script for it. To test the script works:
 
-Consider lpep_pickup_datetime in '2019-09-18' and ignoring Borough has Unknown
+```
+python3 ingest_data.py \
+    --user=root \
+    --password=root \
+    --host=localhost \
+    --port=5432 \
+    --db_name=ny_taxi \
+    --table_name=green_taxi_trips \
+    --url=https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz
+```
+Now we are ready to dockerize the data ingestion. After editing the Dockerfile to use the new ingestion script and install the required dependencies, we can build the new image:
 
-Which were the 3 pick up Boroughs that had a sum of total_amount superior to 50000?
- 
-- [ ] "Brooklyn" "Manhattan" "Queens"
-- [ ] "Bronx" "Brooklyn" "Manhattan"
-- [ ] "Bronx" "Manhattan" "Queens" 
-- [ ] "Brooklyn" "Queens" "Staten Island"
+```
+docker build -t taxi_ingest:v001 .
+``` 
 
+After building, we can run the pipeline with the following command:
+```
+docker run -it \
+    --network=pg-network \
+    taxi_ingest:v001 \
+        --user=root \
+        --password=root \
+        --host=pg-database \
+        --port=5432 \
+        --db_name=ny_taxi \
+        --table_name=green_taxi_trips \
+        --url=https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz
+```
 
-### 6. Largest tip
+## Docker Compose
 
-For the passengers picked up in September 2019 in the zone name Astoria which was the drop off zone that had the largest tip?
-We want the name of the zone, not the id.
+USed to start both containers (postgres and pgadmin) at the same time. Some notes:
+- Since they are being generated from `docker-compose` we don't need to specify the network - they will automatically be in the same network.
 
-Note: it's not a typo, it's `tip` , not `trip`
+pgAdmin defines a anonymous volume when using docker compose, to override this behaviour we have to name it in the docker-compose file. We also have to define it under `volumes`. The notation `pgadmin_data: {}` is used to define a named volume without any additional configuration options. Here's a breakdown of what it means:
 
-- [ ] Central Park
-- [ ] Jamaica
-- [ ] JFK Airport
-- [ ] Long Island City/Queens Plaza
+- `pgadmin_data`: This is the name of the volume. You can refer to this name in the volumes section of your services to use this volume.
+- `{}`: These curly braces represent an empty dictionary in YAML. In the context of Docker Compose, it means that you're creating a volume named pgadmin_data with the default settings.
 
+Setting up pgAdmin with a persistent volume also persists the settings, so you don't have to create a new server each time you restart the containers.
 
 # Terraform
-
-In this section homework we'll prepare the environment by creating resources in GCP with Terraform.
-
-In your VM on GCP/Laptop/GitHub Codespace install Terraform. 
-Copy the files from the course repo
-[here](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform/1_terraform_gcp/terraform) to your VM/Laptop/GitHub Codespace.
-
-Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
-
-
-## Question 7. Creating Resources
-
-After updating the main.tf and variable.tf files run:
-
-```
-terraform apply
-```
-
-Paste the output of this command into the homework submission form.
-
-
-## Submitting the solutions
-
-* Form for submitting: https://courses.datatalks.club/de-zoomcamp-2024/homework/hw01
-* You can submit your homework multiple times. In this case, only the last submission will be used. 
-
-Deadline: 29 January, 23:00 CET
