@@ -61,7 +61,7 @@ We will also need the dataset with zones:
 See jupyter notebook [`upload-data.ipynb`](../1_intro_prereqs/code/upload-data.ipynb)
 
 
-## PgAdmin
+## pgAdmin
 ```
 docker run -it \
   -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
@@ -69,9 +69,13 @@ docker run -it \
   -p 8080:80 \
   dpage/pgadmin4
 ```
-[Open PgAdmin](http://localhost:8080/) in the browser.
+[Open pgAdmin](http://localhost:8080/) in the browser.
 
-To be able to use the new PgAdmin container with our database in the postgres container, they need to be connected. For that we need to put them in the same network, as by default they are isolated. 
+To be able to use the new pgAdmin container with our database in the postgres container, they need to be connected. For that we need to put them in the same network, as by default they are isolated. 
+
+Once pgAdmin is running, you need to set up a server to be able to see your database (later we define a persistent volume that will remember those settings.)
+
+![Setting up new server in pgAdmin](./imgs/pg-admin-new-server.png)
 
 
 ## Put postgres and pgadmin in the same network
