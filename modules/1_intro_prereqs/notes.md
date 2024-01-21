@@ -1,8 +1,8 @@
 # Module 1
 
-## Notes
+Setting up Docker, using PostgreSQL in Docker, downloading the datasets (diverges from the pre-recorded video lesson), using SQL to get information on the dataset and setting up Terraform.
 
-### Docker
+# Docker
 - build your own image: `docker build -t test:pandas .` 
   - image name is `test`
   - image tag tag is `pandas`
@@ -10,7 +10,7 @@
 - run your new image as container: `docker run -it test:pandas`
 - to pass an argument to ap python script being executed when running the container: `docker run -it test:pandas 2021-01-15` where the date is the arg you want to pass to `pipeline.py`.
 
-#### postgreSQL in Docker
+## postgreSQL in Docker
 In WSL and windows, using the commands shown in the video does not work, the container does not have permission to write to the local file system. As a work around you can create a docker volume, in this case I called it `pgadmin`.
 
 First run `docker volume create pgdata` then continue with the command given.
@@ -26,13 +26,13 @@ docker run -it \
 ```
 
 You can see the postgres files in the new volume using Docker Desktop:
-![GIF showing docker volume in docker desktop UI](../imgs/docker-volume.gif)
+![GIF showing docker volume in docker desktop UI](./imgs/docker-volume.gif)
 
 To access the database:
 - Install `pgcli` in a virtual environment
 - Connect to database: `pgcli -h localhost -p 5432 -u root -d ny_taxi`
 
-#### Download the datasets
+## Download the datasets
 - `wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz`
 - `wget https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv`
 
@@ -74,7 +74,7 @@ What is version of the package *wheel* ?
 4. Run the container again with an entrypoint `docker run -it --entrypoint=bash python:3.9`
 5. Now you can run `pip list wheel`
 
-# Prepare Postgres
+# Postgres
 
 Run Postgres and load data as shown in the videos
 We'll use the green taxi trips from September 2019:
@@ -87,9 +87,12 @@ You will also need the dataset with zones:
 
 - [x] Download this data and put it into Postgres (with jupyter notebooks or with a pipeline)
 
-# TO DO
+**How complete task:** 
+See jupyter notebook `upload-data.ipynb`
 
-## Question 3. Count records 
+## Questions 
+
+### 3. Count records 
 
 How many taxi trips were totally made on September 18th 2019?
 
@@ -97,49 +100,49 @@ Tip: started and finished on 2019-09-18.
 
 Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in the format timestamp (date and hour+min+sec) and not in date.
 
-- 15767
-- 15612
-- 15859
-- 89009
+- [ ] 15767
+- [ ] 15612
+- [ ] 15859
+- [ ] 89009
 
-## Question 4. Largest trip for each day
+
+### 4. Largest trip for each day
 
 Which was the pick up day with the largest trip distance
 Use the pick up time for your calculations.
 
-- 2019-09-18
-- 2019-09-16
-- 2019-09-26
-- 2019-09-21
+- [ ] 2019-09-18
+- [ ] 2019-09-16
+- [ ] 2019-09-26
+- [ ] 2019-09-21
 
 
-## Question 5. Three biggest pick up Boroughs
+### 5. Three biggest pick up Boroughs
 
 Consider lpep_pickup_datetime in '2019-09-18' and ignoring Borough has Unknown
 
 Which were the 3 pick up Boroughs that had a sum of total_amount superior to 50000?
  
-- "Brooklyn" "Manhattan" "Queens"
-- "Bronx" "Brooklyn" "Manhattan"
-- "Bronx" "Manhattan" "Queens" 
-- "Brooklyn" "Queens" "Staten Island"
+- [ ] "Brooklyn" "Manhattan" "Queens"
+- [ ] "Bronx" "Brooklyn" "Manhattan"
+- [ ] "Bronx" "Manhattan" "Queens" 
+- [ ] "Brooklyn" "Queens" "Staten Island"
 
 
-## Question 6. Largest tip
+### 6. Largest tip
 
 For the passengers picked up in September 2019 in the zone name Astoria which was the drop off zone that had the largest tip?
 We want the name of the zone, not the id.
 
 Note: it's not a typo, it's `tip` , not `trip`
 
-- Central Park
-- Jamaica
-- JFK Airport
-- Long Island City/Queens Plaza
+- [ ] Central Park
+- [ ] Jamaica
+- [ ] JFK Airport
+- [ ] Long Island City/Queens Plaza
 
 
-
-## Terraform
+# Terraform
 
 In this section homework we'll prepare the environment by creating resources in GCP with Terraform.
 

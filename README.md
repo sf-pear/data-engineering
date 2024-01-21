@@ -4,14 +4,14 @@ This is my code following the DataTalks [Data Engineering Zoomcamp](https://gith
 
 - [Course app](https://dezoomcamp.streamlit.app)
 - [YouTube playlist](https://www.youtube.com/playlist?list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb)
-- [Cohort specific homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/coh)
+- [Cohort specific homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024)
 - [Original course repo](https://github.com/DataTalksClub/data-engineering-zoomcamp)
 
 ## Deadlines
 
 | Module                                                                                                                      | Start Date | Homework Due | Duration (weeks) | Videos                                                               |     |
 | --------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------ | ---------------- | -------------------------------------------------------------------- | --- |
-| [1. Introduction & Prerequisites](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) | 15 Jan     | 25 Jan       | 2                | [1](https://youtu.be/EYNwNlOrpr0), [2](https://youtu.be/2JM-ziJt0WI) | 📝   |
+| [1. Introduction & Prerequisites](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) | 15 Jan     | 25 Jan       | 2                | [1](https://youtu.be/EYNwNlOrpr0), [2](https://youtu.be/2JM-ziJt0WI) | [📝](https://github.com/sf-pear/data-engineering/blob/main/homeworks/1_intro_prereqs/notes.md)   |
 | 2. Workflow Orchestration                                                                                                   | 29 Jan     | 05 Feb       | 1                | 1                                                                    | 📝   |
 | dlt workshop                                                                                                                | 05 Feb     | 15 Feb       | n/a              | 1                                                                    | 📝   |
 | 3. Data Warehouse                                                                                                           | 05 Feb     | 12 Feb       | 1                | 1                                                                    | 📝   |
@@ -49,11 +49,11 @@ To enable the docker CLI on your distro of choice within WSL, just adjust the se
 - [dashboard](https://console.cloud.google.com/welcome)
 - [SDK](https://cloud.google.com/sdk/docs/install#linux)
 
-Before course starts:
+<!-- Before course starts:
 - [x] Docker Desktop installed
 - [x] Env with python (I use mamba)
 - [x] Get a Google Cloud account ([dashboard](https://console.cloud.google.com/welcome))
 - [ ] Install Google Cloud [SDK](https://cloud.google.com/sdk/docs/install#linux)
     - Assuming they mean the CLI? Do I really need this?
 - [ ] Install [Terraform](https://developer.hashicorp.com/terraform/install?product_intent=terraform) (try [OpenTofu](https://opentofu.org/docs/intro/install/deb/))
-    - Can I only install it in my env (`mamba install conda-forge::terraform`)?
+    - Can I only install it in my env (`mamba install conda-forge::terraform`)? -->
