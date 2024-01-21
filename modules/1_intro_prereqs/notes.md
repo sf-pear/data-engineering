@@ -76,19 +76,19 @@ What is version of the package *wheel* ?
 
 # Postgres
 
-Run Postgres and load data as shown in the videos
+Run Postgres and load data as shown in the videos.
 We'll use the green taxi trips from September 2019:
 
 ```wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz```
 
-You will also need the dataset with zones:
+We will also need the dataset with zones:
 
 ```wget https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv```
 
 - [x] Download this data and put it into Postgres (with jupyter notebooks or with a pipeline)
 
 **How complete task:** 
-See jupyter notebook `upload-data.ipynb`
+See jupyter notebook [`upload-data.ipynb`](../1_intro_prereqs/code/upload-data.ipynb)
 
 ## Questions 
 
