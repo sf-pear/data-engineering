@@ -9,20 +9,20 @@ This is my code following the DataTalks [Data Engineering Zoomcamp](https://gith
 
 ## Deadlines
 
-| Module                                                                                                                      | Start Date | Homework Due | Duration (weeks) | Videos                                                                                                  | Notes                                     |
-| --------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------ | ---------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| [1. Introduction & Prerequisites](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) | 15 Jan     | 25 Jan       | 2                | [1](https://youtu.be/EYNwNlOrpr0), [2](https://youtu.be/2JM-ziJt0WI), [3](https://youtu.be/hCAIVe9N0ow), 4, 5, 6 | [📝](./modules/1_intro_prereqs/notes.md) |
-| 2. Workflow Orchestration                                                                                                   | 29 Jan     | 05 Feb       | 1                | 1                                                                                                       | 📝                                       |
-| dlt workshop                                                                                                                | 05 Feb     | 15 Feb       | n/a              | 1                                                                                                       | 📝                                       |
-| 3. Data Warehouse                                                                                                           | 05 Feb     | 12 Feb       | 1                | 1                                                                                                       | 📝                                       |
-| 4. Analytics Engineering                                                                                                    | 15 Feb     | 22 Feb       | 1                | 1                                                                                                       | 📝                                       |
-| 5. Batch processing                                                                                                         | 22 Feb     | 04 Mar       | 1.5              | 1                                                                                                       | 📝                                       |
-| 6. Streaming                                                                                                                | 04 Mar     | 15 Mar       | 1.5              | 1                                                                                                       | 📝                                       |
-| RisingWave workshop                                                                                                         | 04 Mar     | 18 Mar       | n/a              | 1                                                                                                       | 📝                                       |
-| Project (attempt 1)                                                                                                         | 18 Mar     | 01 Apr       | 2                | 1                                                                                                       | 📝                                       |
-| Project evaluation (attempt 1)                                                                                              | 01 Apr     | 08 Apr       | 1                | 1                                                                                                       | 📝                                       |
-| Project (attempt 2)                                                                                                         | 01 Apr     | 15 Apr       | 2                | 1                                                                                                       | 📝                                       |
-| Project evaluation (attempt 2)                                                                                              | 15 Apr     | 29 Apr       | 1                | 1                                                                                                       | 📝                                       |
+| Module                                                                                                                      | Start Date | Homework Due | Duration (weeks) | Videos                                   | Notes                                     |
+| --------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------ | ---------------- | ---------------------------------------- | ----------------------------------------- |
+| [1. Introduction & Prerequisites](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) | 15 Jan     | 25 Jan       | 2                | [📺 x7](#1-introduction-and-prerequisites) | [📝](./modules/1_intro_prereqs/notes.md) |
+| 2. Workflow Orchestration                                                                                                   | 29 Jan     | 05 Feb       | 1                | [📺 x16](#2-workflow-orchestration)         | 📝                                       |
+| dlt workshop                                                                                                                | 05 Feb     | 15 Feb       | n/a              | 📺                                      | 📝                                       |
+| 3. Data Warehouse                                                                                                           | 05 Feb     | 12 Feb       | 1                | 📺                                      | 📝                                       |
+| 4. Analytics Engineering                                                                                                    | 15 Feb     | 22 Feb       | 1                | 📺                                      | 📝                                       |
+| 5. Batch processing                                                                                                         | 22 Feb     | 04 Mar       | 1.5              | 📺                                      | 📝                                       |
+| 6. Streaming                                                                                                                | 04 Mar     | 15 Mar       | 1.5              | 📺                                      | 📝                                       |
+| RisingWave workshop                                                                                                         | 04 Mar     | 18 Mar       | n/a              | 📺                                      | 📝                                       |
+| Project (attempt 1)                                                                                                         | 18 Mar     | 01 Apr       | 2                | 📺                                      | 📝                                       |
+| Project evaluation (attempt 1)                                                                                              | 01 Apr     | 08 Apr       | 1                | 📺                                      | 📝                                       |
+| Project (attempt 2)                                                                                                         | 01 Apr     | 15 Apr       | 2                | 📺                                      | 📝                                       |
+| Project evaluation (attempt 2)                                                                                              | 15 Apr     | 29 Apr       | 1                | 📺                                      | 📝                                       |
 
 
 ## Prep
@@ -32,19 +32,19 @@ Here is a checklist of what you need:
 - [ ] Install Docker
 - [ ] Get Google Cloud account
 
-### Virtual env
+### Create a python virtual enviroment
 
 I use mamba to manage my virtual environments, see `env.yaml` for requirements (This will be updated as I move through the course).
 
 
-### Install Docker
+### Install Docker Desktop
 
 Setting up Docker with Windows 11 and WSL is very easy. Assuming WSL is  already installed, install [Docker Desktop](https://www.docker.com/products/docker-desktop/) on Windows. 
 To enable the docker CLI on your distro of choice within WSL, just adjust the settings in Docker Desktop:
 - Settings > Resources > WSL integration
 - Select the distros where you want to enable it to use `docker` commands.
 
-### Google Cloud
+### Create a Google Cloud account
 
 - [dashboard](https://console.cloud.google.com/welcome)
 - [SDK](https://cloud.google.com/sdk/docs/install#linux)
@@ -60,7 +60,7 @@ To enable the docker CLI on your distro of choice within WSL, just adjust the se
 
 ## Modules
 
-### 1. Introduction & Prerequisites
+### 1. Introduction and Prerequisites
 
 This section will cover Docker, running postgres and pgAdmin containers, some SQL basics and setting up cloud resources in Google Cloud using Terraform.
 
@@ -70,5 +70,17 @@ This section will cover Docker, running postgres and pgAdmin containers, some SQ
 - [**3**: Connecting pgAdmin and Postgres](https://youtu.be/hCAIVe9N0ow)
 - [**4**: Dockerizing the Ingestion Script](https://youtu.be/B1WwATwf-vY)
 - [**5**: Running Postgres and pgAdmin with Docker-Compose](https://youtu.be/hKI6PkPhpa0)
-- [**6**: SQL Refreshser](https://youtu.be/QEcps_iskgg)
+- [**6**: SQL Refreshser](https://youtu.be/QEcps_iskgg) #NEXT   
+- [**7**: ]()
+- [**8**: ]()
+- [**9**: ]()
+- [**10**: ]()
+- [**11**: ]()
+- [**12**: ]()
 - [**Optional** (if you have issues with pgcli): Optional: Connecting to Postgres with Jupyter and Pandas](https://youtu.be/3IkfkTwqHx4)
+
+### 2. Workflow Orchestration
+
+This section will cover Docker, running postgres and pgAdmin containers, some SQL basics and setting up cloud resources in Google Cloud using Terraform.
+
+#### Videos
