@@ -151,4 +151,56 @@ pgAdmin defines a anonymous volume when using docker compose, to override this b
 
 Setting up pgAdmin with a persistent volume also persists the settings, so you don't have to create a new server each time you restart the containers.
 
+# SQL Refresh
+
+## Inner join
+
+```SQL
+SELECT 
+    lpep_pickup_datetime,
+    lpep_dropoff_datetime,
+    total_amount,
+    CONCAT(zpu."Borough", ' / ', zpu."Zone") as "pickup_loc",
+    CONCAT(zdo."Borough", ' / ', zdo."Zone") as "dropoff_loc"
+FROM
+    green_taxi_trips t,
+    zones zpu,
+    zones zdo
+WHERE
+    t."PULocationID" = zpu."LocationID" AND
+    t."DOLocationID" = zdo."LocationID"
+LIMIT 100
+```
+Can also be written as:
+
+```SQL
+SELECT 
+    lpep_pickup_datetime,
+    lpep_dropoff_datetime,
+    total_amount,
+    CONCAT(zpu."Borough", ' / ', zpu."Zone") as "pickup_loc",
+    CONCAT(zdo."Borough", ' / ', zdo."Zone") as "dropoff_loc"
+FROM
+    green_taxi_trips t JOIN zones zpu
+        ON t."PULocationID" = zpu."LocationID" 
+    JOIN zones zdo
+        ON t."DOLocationID" = zdo."LocationID"   
+LIMIT 100
+```
+
+In this query, the same zones table is used twice, aliased as `zpu` and `zdo`, to serve two different purposes: one for pickup locations and one for dropoff locations. This approach is necessary because the `green_taxi_trips` table contains two different location IDs (`PULocationID` for pickup and `DOLocationID` for dropoff), and each of these IDs needs to be joined with the zones table to retrieve the corresponding location information (borough and zone) for both pickup and dropoff.
+
+By aliasing the zones table twice, the query can independently join:
+
+- `PULocationID` from `green_taxi_trips` with `LocationID` in zones aliased as `zpu` (for pickup locations).
+- `DOLocationID` from `green_taxi_trips` with `LocationID` in zones aliased as `zdo` (for dropoff locations).
+  
+This setup allows the query to correctly associate each trip with both its pickup and dropoff locations, even though the location data for both comes from the same zones table. It's a common technique in SQL to manage such relationships where multiple columns in one table need to be joined with columns in another table.
+
+## Other
+
+More SQL queries examples in [`modules/1_intro_prereqs/code/queries.sql`](./code/queries.sql)
+
+**Recomendation:** [PostgreSQL vs code extension](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) for exploring the database. Very helpful to create queries and you can also execute them, without having to open pgAdmin.
+
 # Terraform

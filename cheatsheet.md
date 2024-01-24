@@ -27,6 +27,8 @@ A postgres client that does auto-completion and syntax highlighting.
 
 # SQL
 
-| Description   | Command                           |
-| ------------- | --------------------------------- |
-| Count records | `SELECT count(1) FROM table_name` |
+| Description   | Command                            |
+| ------------- | ---------------------------------- |
+| Count records | `SELECT count(1) FROM table_name;` |
+| Get top 3     | `SELECT * FROM zones LIMIT 3;`     |
+|               |                                    |
