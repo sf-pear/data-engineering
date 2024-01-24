@@ -1,2 +1,8 @@
 /data
 **gz
+private_notes.md
+
+# ignore terraform stuff
+# leave main.tf example
+**/terraform/*
+!**/terraform/main.tf

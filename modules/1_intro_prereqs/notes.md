@@ -204,3 +204,53 @@ More SQL queries examples in [`modules/1_intro_prereqs/code/queries.sql`](./code
 **Recomendation:** [PostgreSQL vs code extension](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres) for exploring the database. Very helpful to create queries and you can also execute them, without having to open pgAdmin.
 
 # Terraform
+
+What it is not:
+- Does not manage and update code on infrastructure
+- Does not give you the ability to change immutable resources
+- Not used to manage resources not defined in your terraform files
+
+So what is it? **Infrastructure as code.** Allows you to make resources with code files.
+
+## Key commands
+
+- `terraform init`: get me the providers I need
+- `terraform plan`: show what I am about to do without actually doing it
+- `terraform apply`: do what is described in the tf files
+- `terraform destroy`: remove all infra defined in the tf files
+- `terraform fmt`: formats your .tf files 
+
+## Steps
+1. Create a service account
+2. [Give service account the correct permissions](#setting-up-permisions-on-gcp)
+3. Generate a JSON key, save it and don't forget to add to `.gitignore`
+4. Run `terraform init`
+5. Write [`main.tf`](./code/terraform/main.tf) file
+   - Get [Google's provider](https://registry.terraform.io/providers/hashicorp/google/latest) code
+   - Get code to create a new bucket in Google cloud storage service (GCS), you can find [this page](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket) by googling "terraform google cloud storage bucket".
+6. Run `terraform plan` to see what Terraform will do, than run `terraform apply` to create the resources defined in `main.tf`
+7. Go look at your beautiful bucket [here](https://console.cloud.google.com/storage/browser).
+8. Delete it by running `terraform destroy`
+
+### Setting up permisions on GCP
+
+![how to get to iam setting in GCP](./imgs/gcp-iam.png)
+
+Click create new service account, fill out the name and continue. For this course we need the following roles:
+- Storage Admin
+- BigQuery Admin
+- Compute Admin
+
+**Note:** there are very broad roles and in real life you will probably want to limit these.
+
+## Useful links
+- [How to edit service account permissions](https://youtu.be/Y2ux7gq3Z0o?feature=shared&t=199)
+- [How to generate a key](https://youtu.be/Y2ux7gq3Z0o?feature=shared&t=235)
+- [How to see available regions](https://cloud.google.com/compute/docs/regions-zones/viewing-regions-zones#gcloud_1)
+  - Use the cloud shell to run `gcloud compute regions list` 
+  - You can also filter by region, if you are in europe like me, just run `gcloud compute regions list --filter=europe` to see avaible regions
+
+## [`main.tf`](./code/terraform/main.tf)
+
+Some notes on resource configuration options:
+- `type = "AbortIncompleteMultipartUpload"`: This action specifies that incomplete multipart uploads should be aborted when they reach the age defined in the condition. Multipart uploads are a way to upload a single object as a set of parts. If an upload is initiated but not completed, this rule will automatically abort it after it's 1 day old, potentially freeing up storage and reducing costs.
