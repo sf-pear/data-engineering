@@ -41,10 +41,21 @@ Tip: started and finished on 2019-09-18.
 Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in the format timestamp (date and hour+min+sec) and not in date.
 
 - [ ] 15767
-- [ ] 15612
+- [X] 15612
 - [ ] 15859
 - [ ] 89009
 
+
+```sql
+SELECT 
+    COUNT(1)
+FROM
+    green_taxi_trips t
+WHERE
+    CAST(lpep_pickup_datetime AS DATE) = '2019-09-18'
+    AND
+    CAST(lpep_dropoff_datetime AS DATE) = '2019-09-18';
+```
 
 ### 4. Largest trip for each day
 
@@ -53,9 +64,20 @@ Use the pick up time for your calculations.
 
 - [ ] 2019-09-18
 - [ ] 2019-09-16
-- [ ] 2019-09-26
+- [x] 2019-09-26
 - [ ] 2019-09-21
 
+```sql
+SELECT 
+    CAST(lpep_pickup_datetime AS DATE) as "day",
+    COUNT(1),
+    MAX(trip_distance) as "max distance"
+FROM
+    green_taxi_trips t
+GROUP BY
+    CAST(lpep_pickup_datetime AS DATE)
+ORDER BY "max distance" DESC;
+```
 
 ### 5. Three biggest pick up Boroughs
 
@@ -63,10 +85,25 @@ Consider lpep_pickup_datetime in '2019-09-18' and ignoring Borough has Unknown
 
 Which were the 3 pick up Boroughs that had a sum of total_amount superior to 50000?
  
-- [ ] "Brooklyn" "Manhattan" "Queens"
+- [x] "Brooklyn" "Manhattan" "Queens"
 - [ ] "Bronx" "Brooklyn" "Manhattan"
 - [ ] "Bronx" "Manhattan" "Queens" 
 - [ ] "Brooklyn" "Queens" "Staten Island"
+
+```sql
+SELECT 
+    zpu."Borough" as "pickup_borough",
+    SUM(total_amount)
+FROM
+    green_taxi_trips t FULL OUTER JOIN zones zpu
+        ON t."PULocationID" = zpu."LocationID"
+WHERE
+    CAST(lpep_pickup_datetime AS DATE) = '2019-09-18'
+GROUP BY
+    pickup_borough
+HAVING
+    SUM(total_amount) > 50000;
+```
 
 
 ### 6. Largest tip
@@ -78,9 +115,25 @@ Note: it's not a typo, it's `tip` , not `trip`
 
 - [ ] Central Park
 - [ ] Jamaica
-- [ ] JFK Airport
+- [x] JFK Airport
 - [ ] Long Island City/Queens Plaza
 
+```sql
+SELECT 
+    CAST(lpep_dropoff_datetime AS date),
+    zpu."Zone" as "pickup_zone",
+    zdo."Zone" as "dropoff_zone",
+    tip_amount
+FROM
+    green_taxi_trips t 
+    FULL OUTER JOIN zones zpu ON t."PULocationID" = zpu."LocationID"
+    FULL OUTER JOIN zones zdo ON t."DOLocationID" = zdo."LocationID"
+WHERE
+    EXTRACT(YEAR FROM lpep_dropoff_datetime) = 2019 AND
+    EXTRACT(MONTH FROM lpep_dropoff_datetime) = 9 AND
+    zpu."Zone" = 'Astoria'
+ORDER BY tip_amount DESC;
+```
 
 # Terraform
 
@@ -95,7 +148,7 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 
 ## Question 7. Creating Resources
 
-After updating the main.tf and variable.tf files run:
+After updating the `main.tf` and `variable.tf` (this doesn't exist?) files run:
 
 ```
 terraform apply
