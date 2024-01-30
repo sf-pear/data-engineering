@@ -2,6 +2,14 @@
 **gz
 private_notes.md
 
+**/.env
+
+# ignore stuff geenrated by mage - for now at least
+modules/2_workflow_orchestration/code/mage_data
+modules/2_workflow_orchestration/code/magic-zoomcamp
+modules/2_workflow_orchestration/code/personal-gcp.json
+modules/2_workflow_orchestration/code/titanic_clean.csv
+
 # ignore terraform stuff
 # leave main.tf example
 **/terraform/*
