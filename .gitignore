@@ -14,3 +14,6 @@ modules/2_workflow_orchestration/code/titanic_clean.csv
 # leave main.tf example
 **/terraform/*
 !**/terraform/main.tf
+
+# GCP
+modules/2_workflow_orchestration/code/enhanced-bonito-411221-42d6c353c42e.json
