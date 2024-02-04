@@ -255,3 +255,179 @@ We can add a data loader to confirm everything worked. I also like using the [Po
 This is how to connect it:
 
 ![Connect to database using postgres explorer](./imgs/postgres-explorer.gif)
+
+
+## Configuring GCP
+
+From you [Google Cloud console](https://console.cloud.google.com/welcome):
+
+1. Create [Storage Bucket](https://console.cloud.google.com/storage) 
+   - 📌 bucket names here have to be globally unique.
+2. Create [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) - for the purpose of this tutorial go with the more generous permission of the role 'Owner'
+3. Create a key for the new service account (select JSON as the key type)
+4. Copy saved JSON into the mage directory (in this repo that is [`modules/2_workflow_orchestration/code`](./code)) - docker will mount this file into the volume and we will be able to use it to connect to Google Cloud.
+5. In the MAge GUI or VS Code, we go back to the [`io_config.yaml`](./code/magic-zoomcamp/io_config.yaml) file
+   - Instead of pasting the config directly in the file, we will use the JSON file.
+   - As the file is in the mounted volume, we need to set the path accordingly: ```GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/enhanced-bonito-411221-42d6c353c42e.json"```
+6. Test the connection to Google Cloud:
+   - **BigQuery:** editing the `test_postgres` data loader block like this, and run the block:
+   ![alt text](./imgs/test-gcp.png)
+   - **Bucket:** This is a little more involved. We will use the Titanic dataset in the `example_pipeline` to do this.
+     1. Drag the [`titanic_clean.csv`](./code/titanic_clean.csv) file into the bucket  
+     2. Create a new data loader (+ Data loader > Python > Google Cloud Storage) and rename it `test_gcs`
+     3. Edit `bucket_name` and `object_key` in line 22 and 23 then run the block.
+        ```py
+        bucket_name = 'your-bucket-name'
+        object_key = 'titanic_clean.csv'
+        ```
+
+## ETL: API to GCS
+
+Now we will write data to Google Cloud Storage instead of Postgres.
+
+1. Start with a new batch pipeline
+2. In mage we can re-use blocks we already have without code duplication, so here we can just drag `load_api_data` to reuse the block in this new pipeline.
+3. Also drag `transform_taxi_data` and make sure to connect the blocks
+4. Now we just write a new exporter to send data to GCS (+ Data exporter > Python > Google Cloud Storage) and name it `taxi_to_gcs_parquet`
+5. Connect the data exporter to the transformation block then run it with "execute with all upstream blocks"  
+![ETL data flow diagram](./imgs/data-flow.png)
+6. Go to your bucket and check out the new parquet file you created with this pipeline.
+
+### Partitioning data with PyArrow
+
+We don't want to be writing just one big file for all our data, so we are going to partion them. This means we will break them up by a row a characteristic - we can also partion by date because it creates an even distribution and is an usual way of querying data, making it easier to access. 
+
+💡 A big advantage of using PyArrow is abstracting the logic of chuncking the data - instead writing it yourself, the `write_to_dataset` method allows you to just define how to partion and handles everything for you.
+
+1. Create new data loader `taxi_to_gcs_partitioned_parquet` (+ Data exporter > Python > Generic) and connect it directly to the transformer block
+
+```py
+import pyarrow as pa
+import pyarrow.parquet as pq 
+import os 
+
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/keys.json'
+
+
+bucket_name = 'your_bucket'
+project_id = 'your_project_id'
+table_name = 'nyc_taxi_data'
+root_path = f'{bucket_name}/{table_name}'
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    # create date column from datetime colum to use to partion the data
+    data['tpep_pickup_date'] = data['tpep_pickup_datetime'].dt.date
+
+    # read dataframe into pyarrow table
+    table = pa.Table.from_pandas(data)
+
+    # defining this object allows automacally access out environment variables
+    gcs = pa.fs.GcsFileSystem()
+
+    # write dataset as partitioned parquet in GCS
+    pq.write_to_dataset(
+        table,
+        root_path=root_path,
+        partition_cols=['tpep_pickup_date'],
+        filesystem=gcs
+    )
+```
+## Parameterized Execution
+
+What is it? Running a pipeline with a dependency on a variable, a date for example.
+
+Parameterized execution refers to running a data pipeline where certain aspects of the execution are controlled by parameters that are passed at runtime. This allows for greater flexibility and dynamic behaviour in the data workflow. For example, a parameter could dictate which subset of data to process (such as a specific date range), the output location for exporting the data, or any other aspect of the job that might vary from one execution to another.
+
+It is crucial for handling tasks such as incremental data loads, processing data for specific time periods, or generating reports for varying business parameters. It enables pipelines that are reusable and adaptable without hard-coded values so there is no need to create multiple versions of the same pipeline for different scenarios.
+
+### Creating a new parameterized pipeline
+
+1. Clone pipeline from lat video by right clicking it and clicking "Clone"
+2. Rename it to `load_to_gcp_parameterized`
+3. Delete the connections from `taxi_to_gcs_partitioned_parquet`, then delete the block from the cloned pipeline (this won't delete the block from the project, just from the current pipeline)
+4. Create a new exporter named `export_taxi_to_gcp_parameter` 
+5. Copy the code from `taxi_to_gcs_parquet` for editing ⚠️ Changing code in one block, changes it for every pipeline - so be careful when editing blocks. 
+
+
+We can use kwargs to get access to runtime variables, try it out with:
+```py
+now = kwargs.get('execution_date')
+print(now)
+print(now.date())
+print(now.day)
+print(now.strftime("%Y/%m/%d")) # could generate file path from date 
+```
+
+Full script to upload today's taxi trips to GCS:
+
+```py
+from mage_ai.settings.repo import get_repo_path
+from mage_ai.io.config import ConfigFileLoader
+from mage_ai.io.google_cloud_storage import GoogleCloudStorage
+from pandas import DataFrame
+from os import path
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+
+@data_exporter
+def export_data_to_google_cloud_storage(df: DataFrame, **kwargs) -> None:
+    """
+    Template for exporting data to a Google Cloud Storage bucket.
+    Specify your configuration settings in 'io_config.yaml'.
+
+    Docs: https://docs.mage.ai/design/data-loading#googlecloudstorage
+    """
+
+    now = kwargs.get('execution_date')
+    now_fpath = now.strftime("%Y/%m/%d") 
+
+    config_path = path.join(get_repo_path(), 'io_config.yaml')
+    config_profile = 'default'
+
+    bucket_name = 'your_bucket'
+    object_key = f'{now_fpath}/daily-trips.parquet'
+
+    print(object_key) # just chekcing the path
+
+    GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).export(
+        df,
+        bucket_name,
+        object_key,
+    )
+```
+
+### Setting variables in Mage UI
+
+**Global variables** in a data pipeline are constants that remain unchanged throughout the execution of the pipeline, providing a fixed reference for settings or configurations applicable across all runs.
+
+**Runtime variables** are dynamic and can change with each execution of the pipeline. They allow for customization based on external inputs, conditions at the time of execution, or specific processing requirements for that run.
+
+
+## Backfills
+
+If you had missing data or lost some data and now need to re-run the pipeline, for multiple days/months/etc 
+
+In a typical system you need to write a script to backfill the data for the missing dates. Mage has an options to easily deal with this.
+
+This is going to:
+- Create a 8 runs (last date is inclusive)
+- It will assign the execution date variable to each day in the interval specified
+
+![Backfill example](./imgs/backfill.gif)
+
+## Deployment
+
+How to deploy mage to Google Cloud using Terraform.
+
+### Prerequisites 
+- Terraform
+- gcloud CLI
+- Google Cloud Permissions
+- Mage Terraform Templates
