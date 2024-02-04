@@ -261,15 +261,14 @@ This is how to connect it:
 
 From you [Google Cloud console](https://console.cloud.google.com/welcome):
 
-1. Create [Storage Bucket](https://console.cloud.google.com/storage) 
-   - 📌 bucket names here have to be globally unique.
-2. Create [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) - for the purpose of this tutorial go with the more generous permission of the role 'Owner'
-3. Create a key for the new service account (select JSON as the key type)
-4. Copy saved JSON into the mage directory (in this repo that is [`modules/2_workflow_orchestration/code`](./code)) - docker will mount this file into the volume and we will be able to use it to connect to Google Cloud.
-5. In the MAge GUI or VS Code, we go back to the [`io_config.yaml`](./code/magic-zoomcamp/io_config.yaml) file
+1. Create [Storage Bucket](https://console.cloud.google.com/storage) 📌 bucket names here have to be globally unique.
+1. Create [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts) - for the purpose of this tutorial go with the more generous permission of the role 'Owner'
+2. Create a key for the new service account (select JSON as the key type)
+3. Copy saved JSON into the mage directory (in this repo that is [`modules/2_workflow_orchestration/code`](./code)) - docker will mount this file into the volume and we will be able to use it to connect to Google Cloud.
+4. In the MAge GUI or VS Code, we go back to the [`io_config.yaml`](./code/magic-zoomcamp/io_config.yaml) file
    - Instead of pasting the config directly in the file, we will use the JSON file.
    - As the file is in the mounted volume, we need to set the path accordingly: ```GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/enhanced-bonito-411221-42d6c353c42e.json"```
-6. Test the connection to Google Cloud:
+5. Test the connection to Google Cloud:
    - **BigQuery:** editing the `test_postgres` data loader block like this, and run the block:
    ![alt text](./imgs/test-gcp.png)
    - **Bucket:** This is a little more involved. We will use the Titanic dataset in the `example_pipeline` to do this.
