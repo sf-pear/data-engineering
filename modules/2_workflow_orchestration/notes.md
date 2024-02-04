@@ -82,7 +82,7 @@ How to configure the postgres client so it can connect to the local postgres dat
    
 ![how to find mage's file tree](./imgs/mage-files.gif)
 
-### Creating connection profiles in mage
+### Creating connection profiles in Mage
 
 You can see in the  file, there is a default profile defined. But we can also define for example a "dev" profile. This is useful to separate configurations needed in dev and in production. 
 
