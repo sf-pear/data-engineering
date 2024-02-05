@@ -165,7 +165,75 @@ How many columns need to be renamed to snake case?
 
 Columns: `VendorID`, `RatecodeID`, `PULocationID` and `DOLocationID`
 
-## Question 6. Data Exporting
+## Data Exporting
+
+To PostgreSQL:
+
+```py
+from mage_ai.settings.repo import get_repo_path
+from mage_ai.io.config import ConfigFileLoader
+from mage_ai.io.postgres import Postgres
+from pandas import DataFrame
+from os import path
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+
+@data_exporter
+def export_data_to_postgres(df: DataFrame, **kwargs) -> None:
+    schema_name = 'mage'  
+    table_name = 'green_cab_data' 
+    config_path = path.join(get_repo_path(), 'io_config.yaml')
+    config_profile = 'dev'
+
+    with Postgres.with_config(ConfigFileLoader(config_path, config_profile)) as loader:
+        loader.export(
+            df,
+            schema_name,
+            table_name,
+            index=False,
+            if_exists='replace',
+        )
+```
+
+To Google Cloud Storage:
+
+```py
+import pyarrow as pa
+import pyarrow.parquet as pq 
+import os 
+
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/enhanced-bonito-411221-42d6c353c42e.json'
+
+
+bucket_name = 'my-bucket'
+project_id = 'my-project-id'
+table_name = 'green_taxi_data'
+root_path = f'{bucket_name}/{table_name}'
+
+@data_exporter
+def export_data(data, *args, **kwargs):
+    # read dataframe into pyarrow table
+    table = pa.Table.from_pandas(data)
+
+    # defining this object allows automacally access out environment variables
+    gcs = pa.fs.GcsFileSystem()
+
+    # write dataset as partitioned parquet in GCS
+    pq.write_to_dataset(
+        table,
+        root_path=root_path,
+        partition_cols=['lpep_pickup_date'],
+        filesystem=gcs
+    )
+```
+
+### 6
 
 Once exported, how many partitions (folders) are present in Google Cloud?
 
