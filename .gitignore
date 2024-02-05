@@ -1,19 +1,17 @@
 /data
 **gz
 private_notes.md
+**__pycache__**
 
-**/.env
-
-# ignore stuff geenrated by mage - for now at least
-modules/2_workflow_orchestration/code/mage_data
-modules/2_workflow_orchestration/code/magic-zoomcamp
-modules/2_workflow_orchestration/code/personal-gcp.json
-modules/2_workflow_orchestration/code/titanic_clean.csv
+**.env
+**.json
 
 # ignore terraform stuff
 # leave main.tf example
 **/terraform/*
 !**/terraform/main.tf
 
-# GCP
-modules/2_workflow_orchestration/code/enhanced-bonito-411221-42d6c353c42e.json
+## Mage
+modules/2_workflow_orchestration/code/mage_data/
+# artifact from tutorial
+modules/2_workflow_orchestration/code/titanic_clean.csv 
