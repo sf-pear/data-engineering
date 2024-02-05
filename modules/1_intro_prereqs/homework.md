@@ -6,9 +6,9 @@
 Which tag has the following text? - *Automatically remove the container when it exits* 
 
 - [ ] `--delete`
-- [x] `--rc`
+- [ ] `--rc`
 - [ ] `--rmc`
-- [ ] `--rm`
+- [x] `--rm`
 
 **How to answer:** Run `docker run --help` and read the help text for different flags.
 
@@ -41,7 +41,7 @@ Tip: started and finished on 2019-09-18.
 Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in the format timestamp (date and hour+min+sec) and not in date.
 
 - [ ] 15767
-- [X] 15612
+- [x] 15612
 - [ ] 15859
 - [ ] 89009
 
