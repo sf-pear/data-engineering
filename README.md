@@ -9,20 +9,20 @@ This is my collection of notes and code from following the DataTalks [Data Engin
 
 ## Deadlines
 
-| Module                                                                                                                      | Start Date | Homework Due | Weeks to complete | Videos                                      | Duration | Notes                                              |
-| --------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------ | ----------------- | ------------------------------------------- | -------- | -------------------------------------------------- |
-| [1. Introduction & Prerequisites](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) | 15 Jan     | 25 Jan       | 2                 | [📺 x9](#1-introduction-and-prerequisites) | 2h 50m   | [📝](./modules/1_intro_prereqs/notes.md)          |
-| [2. Workflow Orchestration](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/02-workflow-orchestration) | 29 Jan     | 05 Feb       | 1                 | [📺 x11](#2-workflow-orchestration)        | 1h 32m   | [📝](./modules/2_workflow_orchestration/notes.md) |
-| [dlt workshop](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/workshops/dlt.md)          | 05 Feb     | 15 Feb       | 1.5               | [📺 x1](#dlt)                              | 1h 20m   | [📝](./workshops/dlt/notes.md)                    |
-| 3. Data Warehouse                                                                                                           | 05 Feb     | 12 Feb       | 1                 | 📺                                         |          | 📝                                                |
-| 4. Analytics Engineering                                                                                                    | 15 Feb     | 22 Feb       | 1                 | 📺                                         |          | 📝                                                |
-| 5. Batch processing                                                                                                         | 22 Feb     | 04 Mar       | 1.5               | 📺                                         |          | 📝                                                |
-| 6. Streaming                                                                                                                | 04 Mar     | 15 Mar       | 1.5               | 📺                                         |          | 📝                                                |
-| RisingWave workshop                                                                                                         | 04 Mar     | 18 Mar       | n/a               | 📺                                         |          | 📝                                                |
-| Project (attempt 1)                                                                                                         | 18 Mar     | 01 Apr       | 2                 | 📺                                         |          | 📝                                                |
-| Project evaluation (attempt 1)                                                                                              | 01 Apr     | 08 Apr       | 1                 | 📺                                         |          | 📝                                                |
-| Project (attempt 2)                                                                                                         | 01 Apr     | 15 Apr       | 2                 | 📺                                         |          | 📝                                                |
-| Project evaluation (attempt 2)                                                                                              | 15 Apr     | 29 Apr       | 1                 | 📺                                         |          | 📝                                                |
+| Module                                                               | Start Date | Homework Due | Weeks to complete | Videos | Duration | Notes                                              |
+| -------------------------------------------------------------------- | ---------- | ------------ | ----------------- | ------ | -------- | -------------------------------------------------- |
+| [1. Introduction & Prerequisites](#1-introduction-and-prerequisites) | 15 Jan     | 25 Jan       | 2                 | x9     | 2h 50m   | [📝](./modules/1_intro_prereqs/notes.md)          |
+| [2. Workflow Orchestration](#2-workflow-orchestration)               | 29 Jan     | 05 Feb       | 1                 | x11    | 1h 32m   | [📝](./modules/2_workflow_orchestration/notes.md) |
+| [dlt workshop](#dlt)                                                 | 05 Feb     | 15 Feb       | 1.5               | x1     | 1h 20m   | [📝](./workshops/dlt/notes.md)                    |
+| 3. Data Warehouse                                                    | 05 Feb     | 12 Feb       | 1                 |        |          | 📝                                                |
+| 4. Analytics Engineering                                             | 15 Feb     | 22 Feb       | 1                 |        |          | 📝                                                |
+| 5. Batch processing                                                  | 22 Feb     | 04 Mar       | 1.5               |        |          | 📝                                                |
+| 6. Streaming                                                         | 04 Mar     | 15 Mar       | 1.5               |        |          | 📝                                                |
+| RisingWave workshop                                                  | 04 Mar     | 18 Mar       | n/a               |        |          | 📝                                                |
+| Project (attempt 1)                                                  | 18 Mar     | 01 Apr       | 2                 |        |          | 📝                                                |
+| Project evaluation (attempt 1)                                       | 01 Apr     | 08 Apr       | 1                 |        |          | 📝                                                |
+| Project (attempt 2)                                                  | 01 Apr     | 15 Apr       | 2                 |        |          | 📝                                                |
+| Project evaluation (attempt 2)                                       | 15 Apr     | 29 Apr       | 1                 |        |          | 📝                                                |
 
 
 ## Prep
@@ -53,7 +53,11 @@ To enable the docker CLI on your distro of choice within WSL, just adjust the se
 
 This section will cover Docker, running postgres and pgAdmin containers, some SQL basics and setting up cloud resources in Google Cloud using Terraform.
 
-#### Videos
+#### 📚 Resources
+- Module notes
+- [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/01-docker-terraform/homework.md)
+
+#### 📺 Videos
 - [**1**: Introduction to Docker](https://www.youtube.com/watch?v=EYNwNlOrpr0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=4)
 - [**2**: Ingesting NY Taxi Data to Postgres](https://www.youtube.com/watch?v=2JM-ziJt0WI&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=5) 
 - [**3**: Connecting pgAdmin and Postgres](https://www.youtube.com/watch?v=hCAIVe9N0ow&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=7)
@@ -74,7 +78,12 @@ Bonus videos:
 
 This section covers workflow orchestration with Mage. 
 
-#### Videos
+#### 📚 Resources
+- [Module notes](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/02-workflow-orchestration)
+- [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/02-workflow-orchestration/homework.md)
+- [Mage docs](https://docs.mage.ai/introduction/overview)
+
+#### 📺 Videos
 
 - [**1**: What is Orchestration?](https://www.youtube.com/watch?v=Li8-MWHhTbo&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb)
 - [**2**: What is Mage?](https://www.youtube.com/watch?v=AicKRcK3pa4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=18)
@@ -90,13 +99,26 @@ This section covers workflow orchestration with Mage.
 
 Deployment videos (they say optional, but this is pretty crucial for me):
 - [Deployment Prerequisites](https://www.youtube.com/watch?v=zAwAX5sxqsg&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=28)
-- [Google Cloud Permissions](https://www.youtube.com/watch?v=O_H7DCmq2rA&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=29) #NEXT
+- [Google Cloud Permissions](https://www.youtube.com/watch?v=O_H7DCmq2rA&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=29)
 - [Deploying to Google Cloud Part 1](https://www.youtube.com/watch?v=9A872B5hb_0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=30)
+- There seems to be a missing video here. See [notes](./modules/2_workflow_orchestration/notes.md#terraform-deployment-to-gcp) for details on how to deploy using Terraform.
 - [Deploying to Google Cloud Part 2](https://www.youtube.com/watch?v=0YExsb2HgLI&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=31)
 - [Next Steps](https://www.youtube.com/watch?v=uUtj7N0TleQ&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=32)
 
+Office hours recording [here](https://www.youtube.com/watch?v=7PBvH6dHVxc).
 
 ## Workshops
 
 ### dlt
-- [Video recording](https://www.youtube.com/watch?v=oLXhBM7nf2Q)
+The workshop quickly covers how to build data ingestion pipelines using dlt. It includes:
+- ​Extracting data from APIs, or files.
+- ​Normalizing and loading data
+- ​Incremental loading
+
+#### 📚 Resources
+- [Workshop notes](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/workshops/dlt.md)
+- Homework
+- [dlt docs](https://dlthub.com/docs/intro)
+  
+#### 📺 Video
+- [Data Ingestion From APIs to Warehouses - Adrian Brudaru](https://www.youtube.com/watch?v=oLXhBM7nf2Q)

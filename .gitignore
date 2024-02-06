@@ -6,11 +6,6 @@ private_notes.md
 **.env
 **.json
 
-# # ignore terraform stuff
-# # leave main.tf example
-# **/terraform/*
-# !**/terraform/main.tf
-
 ## MAGE
 modules/2_workflow_orchestration/code/mage_data/
 modules/2_workflow_orchestration/code/magic-zoomcamp/.DS_Store
