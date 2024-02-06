@@ -13,5 +13,19 @@ private_notes.md
 
 ## Mage
 modules/2_workflow_orchestration/code/mage_data/
+modules/2_workflow_orchestration/code/magic-zoomcamp/.DS_Store
+modules/2_workflow_orchestration/code/magic-zoomcamp/.file_versions
+modules/2_workflow_orchestration/code/magic-zoomcamp/.ssh_tunnel
+modules/2_workflow_orchestration/code/magic-zoomcamp/.gitkeep
+modules/2_workflow_orchestration/code/magic-zoomcamp/.log
+modules/2_workflow_orchestration/code/magic-zoomcamp/.logs/
+modules/2_workflow_orchestration/code/magic-zoomcamp/.mage_temp_profiles
+modules/2_workflow_orchestration/code/magic-zoomcamp/.preferences.yaml
+modules/2_workflow_orchestration/code/magic-zoomcamp/.variables/
+modules/2_workflow_orchestration/code/magic-zoomcamp/__pycache__/
+modules/2_workflow_orchestration/code/magic-zoomcamp/docker-compose.override.yml
+modules/2_workflow_orchestration/code/magic-zoomcamp/logs/
+modules/2_workflow_orchestration/code/magic-zoomcamp/mage-ai.db
+modules/2_workflow_orchestration/code/magic-zoomcamp/secrets/
 # artifact from tutorial
 modules/2_workflow_orchestration/code/titanic_clean.csv 
