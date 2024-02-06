@@ -13,7 +13,7 @@ This is my collection of notes and code from following the DataTalks [Data Engin
 | --------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------ | ----------------- | ------------------------------------------- | -------- | -------------------------------------------------- |
 | [1. Introduction & Prerequisites](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) | 15 Jan     | 25 Jan       | 2                 | [📺 x9](#1-introduction-and-prerequisites) | 2h 50m   | [📝](./modules/1_intro_prereqs/notes.md)          |
 | [2. Workflow Orchestration](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/02-workflow-orchestration) | 29 Jan     | 05 Feb       | 1                 | [📺 x11](#2-workflow-orchestration)        | 1h 32m   | [📝](./modules/2_workflow_orchestration/notes.md) |
-| dlt workshop                                                                                                                | 05 Feb     | 15 Feb       | n/a               | 📺                                         |          | 📝                                                |
+| [dlt workshop](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/workshops/dlt.md)          | 05 Feb     | 15 Feb       | 1.5               | [📺 x1](#dlt)                              | 1h 20m   | [📝](./workshops/dlt/notes.md)                    |
 | 3. Data Warehouse                                                                                                           | 05 Feb     | 12 Feb       | 1                 | 📺                                         |          | 📝                                                |
 | 4. Analytics Engineering                                                                                                    | 15 Feb     | 22 Feb       | 1                 | 📺                                         |          | 📝                                                |
 | 5. Batch processing                                                                                                         | 22 Feb     | 04 Mar       | 1.5               | 📺                                         |          | 📝                                                |
@@ -94,3 +94,9 @@ Deployment videos (they say optional, but this is pretty crucial for me):
 - [Deploying to Google Cloud Part 1](https://www.youtube.com/watch?v=9A872B5hb_0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=30)
 - [Deploying to Google Cloud Part 2](https://www.youtube.com/watch?v=0YExsb2HgLI&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=31)
 - [Next Steps](https://www.youtube.com/watch?v=uUtj7N0TleQ&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=32)
+
+
+## Workshops
+
+### dlt
+- [Video recording](https://www.youtube.com/watch?v=oLXhBM7nf2Q)
