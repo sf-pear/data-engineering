@@ -11,6 +11,6 @@ Incremental extraction is not covered - but worth it to learn it on our own.
 # Notes from vid
 - csv is only a container for the data, it does not contain metadata - so adding this can be part of the pipeline
 - main concern - not run out of RAM
-  - if you are running several things in one mahcine, and your pipeline makes the machine to run out of the RAM, teh whole machine will crash, not just the pipeline
+  - if you are running several things in one mahcine, and your pipeline makes the machine to run out of the RAM, the whole machine will crash, not just the pipeline
 
 #TOOTIREDFORTHIS
