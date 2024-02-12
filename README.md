@@ -4,6 +4,7 @@ This is my collection of notes and code from following the DataTalks [Data Engin
 
 - [YouTube playlist](https://www.youtube.com/playlist?list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb)
 - [Cohort specific homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024)
+- [Homework submission](https://courses.datatalks.club/de-zoomcamp-2024/)
 - [Original course repo](https://github.com/DataTalksClub/data-engineering-zoomcamp)
 - [Course app](https://dezoomcamp.streamlit.app)
 
@@ -11,10 +12,10 @@ This is my collection of notes and code from following the DataTalks [Data Engin
 
 | Module                                                               | Start Date | Homework Due | Weeks to complete | Videos | Duration | Notes                                              |
 | -------------------------------------------------------------------- | ---------- | ------------ | ----------------- | ------ | -------- | -------------------------------------------------- |
-| [1. Introduction & Prerequisites](#1-introduction-and-prerequisites) | 15 Jan     | 25 Jan       | 2                 | x9     | 2h 50m   | [📝](./modules/1_intro_prereqs/notes.md)          |
-| [2. Workflow Orchestration](#2-workflow-orchestration)               | 29 Jan     | 05 Feb       | 1                 | x11    | 1h 32m   | [📝](./modules/2_workflow_orchestration/notes.md) |
+| 1. [Introduction & Prerequisites](#1-introduction-and-prerequisites) | 15 Jan     | 25 Jan       | 2                 | x9     | 2h 50m   | [📝](./modules/1_intro_prereqs/notes.md)          |
+| 2. [Workflow Orchestration](#2-workflow-orchestration)               | 29 Jan     | 05 Feb       | 1                 | x11    | 1h 32m   | [📝](./modules/2_workflow_orchestration/notes.md) |
+| 3. [Data Warehouse](#3-data-warehouse)                               | 05 Feb     | 12 Feb       | 1                 | x6     | 1h 01m   | [📝](./modules/3_data_warehouse/notes.md)         |
 | [dlt workshop](#dlt)                                                 | 05 Feb     | 15 Feb       | 1.5               | x1     | 1h 20m   | [📝](./workshops/dlt/notes.md)                    |
-| 3. Data Warehouse                                                    | 05 Feb     | 12 Feb       | 1                 |        |          | 📝                                                |
 | 4. Analytics Engineering                                             | 15 Feb     | 22 Feb       | 1                 |        |          | 📝                                                |
 | 5. Batch processing                                                  | 22 Feb     | 04 Mar       | 1.5               |        |          | 📝                                                |
 | 6. Streaming                                                         | 04 Mar     | 15 Mar       | 1.5               |        |          | 📝                                                |
@@ -54,7 +55,7 @@ To enable the docker CLI on your distro of choice within WSL, just adjust the se
 This section will cover Docker, running postgres and pgAdmin containers, some SQL basics and setting up cloud resources in Google Cloud using Terraform.
 
 #### 📚 Resources
-- Module notes
+- [Module](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform) 
 - [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/01-docker-terraform/homework.md)
 
 #### 📺 Videos
@@ -79,7 +80,7 @@ Bonus videos:
 This section covers workflow orchestration with Mage. 
 
 #### 📚 Resources
-- [Module notes](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/02-workflow-orchestration)
+- [Module](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/02-workflow-orchestration)
 - [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/02-workflow-orchestration/homework.md)
 - [Mage docs](https://docs.mage.ai/introduction/overview)
 
@@ -107,6 +108,22 @@ Deployment videos (they say optional, but this is pretty crucial for me):
 
 Office hours recording [here](https://www.youtube.com/watch?v=7PBvH6dHVxc).
 
+### 3. Data Warehouse
+
+In this section we will talk about data warehousing in general and use [Google BigQuery](https://cloud.google.com/bigquery) as an example.
+
+#### 📚 Resources
+- [Module](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/03-data-warehouse)
+- [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/03-data-warehouse/homework.md)
+
+#### 📺 Videos
+- [**1:** Data Warehouse and BigQuery](https://www.youtube.com/watch?v=jrHljAoD6nM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=35)
+- [**2:** Partioning and Clustering](https://www.youtube.com/watch?v=-CqXf7vhhDs&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=35)
+- [**3:** BigQuery Best Practices](https://www.youtube.com/watch?v=k81mLJVX08w&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=36)
+- [**4:** Internals of Big Query](https://www.youtube.com/watch?v=eduHi1inM4s&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=37)
+- [**5:** BigQuery Machine Learning](https://www.youtube.com/watch?v=B-WtpB0PuG4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=38)
+- [**6:** BigQuery Machine Learning Deployment](https://www.youtube.com/watch?v=BjARzEWaznU&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=39)
+
 ## Workshops
 
 ### dlt
@@ -116,7 +133,7 @@ The workshop quickly covers how to build data ingestion pipelines using dlt. It 
 - ​Incremental loading
 
 #### 📚 Resources
-- [Workshop notes](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/workshops/dlt.md)
+- [Workshop](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/workshops/dlt.md)
 - Homework
 - [dlt docs](https://dlthub.com/docs/intro)
   
