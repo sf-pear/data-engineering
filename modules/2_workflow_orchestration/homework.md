@@ -25,7 +25,9 @@ The goal will be to construct an ETL pipeline that loads the data, performs some
 
 # Questions
 
-## Question 1. Data Loading
+## Data Loading
+
+### 1
 
 Once the dataset is loaded, what's the shape of the data?
 
