@@ -10,14 +10,16 @@ This is my collection of notes and code from following the DataTalks [Data Engin
 
 ## Deadlines
 
+🗓️ [Project's timeline](https://public.flourish.studio/visualisation/16782770/)
+
 | Module                                                               | Start Date | Homework Due | Weeks to complete | Videos | Duration | Notes                                              |
 | -------------------------------------------------------------------- | ---------- | ------------ | ----------------- | ------ | -------- | -------------------------------------------------- |
 | 1. [Introduction & Prerequisites](#1-introduction-and-prerequisites) | 15 Jan     | 25 Jan       | 2                 | x9     | 2h 50m   | [📝](./modules/1_intro_prereqs/notes.md)          |
 | 2. [Workflow Orchestration](#2-workflow-orchestration)               | 29 Jan     | 05 Feb       | 1                 | x11    | 1h 32m   | [📝](./modules/2_workflow_orchestration/notes.md) |
 | 3. [Data Warehouse](#3-data-warehouse)                               | 05 Feb     | 12 Feb       | 1                 | x6     | 1h 01m   | [📝](./modules/3_data_warehouse/notes.md)         |
 | [dlt workshop](#dlt)                                                 | 05 Feb     | 15 Feb       | 1.5               | x1     | 1h 20m   | [📝](./workshops/dlt/notes.md)                    |
-| 4. Analytics Engineering                                             | 15 Feb     | 22 Feb       | 1                 |        |          | 📝                                                |
-| 5. Batch processing                                                  | 22 Feb     | 04 Mar       | 1.5               |        |          | 📝                                                |
+| 4. [Analytics Engineering](#4-analytics-engineering)                 | 15 Feb     | 22 Feb       | 1                 | x10    | 2h 41m   | [📝](./modules/4_analytics_engineering/notes.md)  |
+| 5. [Batch processing](#5-batch-processing)                           | 22 Feb     | 04 Mar       | 1.5               |        |          | 📝                                                |
 | 6. Streaming                                                         | 04 Mar     | 15 Mar       | 1.5               |        |          | 📝                                                |
 | RisingWave workshop                                                  | 04 Mar     | 18 Mar       | n/a               |        |          | 📝                                                |
 | Project (attempt 1)                                                  | 18 Mar     | 01 Apr       | 2                 |        |          | 📝                                                |
@@ -123,6 +125,62 @@ In this section we will talk about data warehousing in general and use [Google B
 - [**4:** Internals of Big Query](https://www.youtube.com/watch?v=eduHi1inM4s&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=37)
 - [**5:** BigQuery Machine Learning](https://www.youtube.com/watch?v=B-WtpB0PuG4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=38)
 - [**6:** BigQuery Machine Learning Deployment](https://www.youtube.com/watch?v=BjARzEWaznU&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=39)
+
+
+### 4. Analytics Engineering
+
+#### 📚 Resources
+- [Module](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/04-analytics-engineering)
+- [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/04-analytics-engineering/homework.md)
+
+#### 📺 Videos
+- [**1:** Analytics Engineering Basics](https://www.youtube.com/watch?v=uF76d5EmdtU&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=41)
+- [**2:** What is dbt?](https://www.youtube.com/watch?v=gsKuETFJr54&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=41)
+- Start Your dbt Project
+  - [**3:** BigQuery and dbt Cloud](https://www.youtube.com/watch?v=J0XCDyKiU64&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=42)
+  - [**4:** Postgres and dbt Core Locally](https://www.youtube.com/watch?v=1HmL63e-vRs&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=43)
+- [**5:** Build the First dbt Models](https://www.youtube.com/watch?v=ueVy2N54lyc&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=44)
+- [**6:** Testing and Documenting the Project](https://www.youtube.com/watch?v=2dNJXHFCHaY&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=45)
+- Deployment
+  - [**7:** Using dbt Cloud ](https://www.youtube.com/watch?v=V2m5C0n8Gro&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=46)
+  - [**8:** Using dbt Locally](https://www.youtube.com/watch?v=Cs9Od1pcrzM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=47)
+- Visualising the data
+  - [**9:** with Google Data Studio](https://www.youtube.com/watch?v=39nLTs74A3E&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=48)
+  - [**10:** with Metabase](https://www.youtube.com/watch?v=BnLkrA7a6gM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=49)
+
+Optional:
+- [Hack for loading data to BigQuery](https://www.youtube.com/watch?v=Mork172sK_c&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=50)
+
+<!-- 7m 14s + 7m 4s + 5m 19s + 6m 47s + 55m 49s + 21m 8s + 13m 11s + 7m 25s + 20m 1s + 17m 28s  -->
+
+### 5. Batch Processing
+
+#### 📚 Resources
+- [Module](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/05-batch)
+- [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/05-batch/homework.md)
+
+#### 📺 Videos
+- **1:** Introduction to Batch Processing
+- **2:** Introduction to Spark
+- **3:** First Look at Spark/PySpark
+- **4:** Spark Dataframes
+- **5:** SQL with Spark
+- **6:** Anatomy of a Spark Cluster
+- **7:** GroupBy in Spark
+- **8:** Joins in Spark
+
+9m 30s + 
+
+Optional:
+- [Installing Spark (Linux)](https://www.youtube.com/watch?v=hqUbB9c8sKg&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=54)
+- [Preparing Yellow and Green Taxi Data](https://www.youtube.com/watch?v=CI3P4tAtru4&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=57)
+- Resilient Distributed Datasets
+  - Operations on Spark RDDs
+  - Spark RDD mapPartition
+- Running Spark in the Cloud
+  - Connecting to Google Cloud Storage
+  - Creating a Local Spark Cluster
+
 
 ## Workshops
 
