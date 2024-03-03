@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    database: enhanced-bonito-411221
+    schema: taxi_data
+    tables:
+      - name: green_tripdata
+      - name: yellow_tripdata
