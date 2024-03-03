@@ -134,6 +134,8 @@ In this section we will talk about data warehousing in general and use [Google B
 - [Homework](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/04-analytics-engineering/homework.md)
 
 #### 📺 Videos
+Optional video (but **watch this first** if like me, you still don't have the full green and yellow taxi data in GCP or local postgres db): [Hack for loading data to BigQuery](https://www.youtube.com/watch?v=Mork172sK_c&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=50)
+
 - [**1:** Analytics Engineering Basics](https://www.youtube.com/watch?v=uF76d5EmdtU&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=41)
 - [**2:** What is dbt?](https://www.youtube.com/watch?v=gsKuETFJr54&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=41)
 - Start Your dbt Project
@@ -141,15 +143,14 @@ In this section we will talk about data warehousing in general and use [Google B
   - [**4:** Postgres and dbt Core Locally](https://www.youtube.com/watch?v=1HmL63e-vRs&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=43)
 - [**5:** Build the First dbt Models](https://www.youtube.com/watch?v=ueVy2N54lyc&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=44)
 - [**6:** Testing and Documenting the Project](https://www.youtube.com/watch?v=2dNJXHFCHaY&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=45)
-- Deployment
-  - [**7:** Using dbt Cloud ](https://www.youtube.com/watch?v=V2m5C0n8Gro&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=46)
-  - [**8:** Using dbt Locally](https://www.youtube.com/watch?v=Cs9Od1pcrzM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=47)
-- Visualising the data
-  - [**9:** with Google Data Studio](https://www.youtube.com/watch?v=39nLTs74A3E&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=48)
-  - [**10:** with Metabase](https://www.youtube.com/watch?v=BnLkrA7a6gM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=49)
+- Deployment using
+  - [**7:** dbt Cloud ](https://www.youtube.com/watch?v=V2m5C0n8Gro&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=46)
+  - [**8:** dbt locally](https://www.youtube.com/watch?v=Cs9Od1pcrzM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=47)
+- Visualising the data with
+  - [**9:** Google Data Studio](https://www.youtube.com/watch?v=39nLTs74A3E&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=48)
+  - [**10:** Metabase](https://www.youtube.com/watch?v=BnLkrA7a6gM&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=49)
 
-Optional:
-- [Hack for loading data to BigQuery](https://www.youtube.com/watch?v=Mork172sK_c&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=50)
+
 
 <!-- 7m 14s + 7m 4s + 5m 19s + 6m 47s + 55m 49s + 21m 8s + 13m 11s + 7m 25s + 20m 1s + 17m 28s  -->
 

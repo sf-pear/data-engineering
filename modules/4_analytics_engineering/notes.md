@@ -18,16 +18,51 @@ ELT (Extract, Load, Transform)
 - This means the we don't focus in not having redundant data ([3NF](https://www.geeksforgeeks.org/third-normal-form-3nf/))  
 - Other approaches: [Bill Inmon](https://www.astera.com/type/blog/data-warehouse-concepts/), [Data vault](https://www.databricks.com/glossary/data-vault)
 
-# DBT
+# DBT set up
 
-## Set up
+If taxi data is not loaded into the db, do this first.
 
-### Local dbt core and portgres
+## dbt Cloud and Google BigQuery
+
+### Loading the data
+
+You can load the data directly from the [market place](https://console.cloud.google.com/marketplace/product/city-of-new-york/nyc-tlc-trips?hl=en&project=enhanced-bonito-411221) like this:
+
+```sql
+-- yellow trips
+CREATE TABLE `enhanced-bonito-411221.taxi_data.yellow_tripdata` AS
+SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2019`;
+
+INSERT INTO `enhanced-bonito-411221.taxi_data.yellow_tripdata`
+SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2020`;
+
+-- green trips
+CREATE TABLE `enhanced-bonito-411221.taxi_data.green_tripdata` AS
+SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2019`;
+
+INSERT INTO `enhanced-bonito-411221.taxi_data.green_tripdata`
+SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2020`;
+```
+
+where:
+- `taxi_data` is the dataset (this has to be created before running the queries)
+- `yellow_tripdata` and `green_tripdata` are the name of the tables (they will be created by the query)
+
+### Create new dbt project
+
+1. Select BigQuery as the connection
+2. Name your project
+3. If working in one big repo for the whole course: go to advanced settings and give the path to the subdirectory where you want your project to be
+4. Create new branch to work in
+5.  
+
+To start the dbt project in dbt Cloud, all you have to do is select BigQuery as the connection type, upload your keys for the project and create/select a gihut repo for the project. I created a new repo here to avoid messing up this one.
+
+## Local dbt core and postgres
 
 - Install dbt: `pip install dbt-postgres`. More info [here](https://docs.getdbt.com/docs/core/pip-install#ubuntudebian).
 - Run `dbt init` and follow the prompts to set up the starter project
 - Run `dbt debug` to check everything is working.
-- If taxi data is not loaded into teh db, [do that](#loadingreloading-the-data)
 
 ## Materializations
 
@@ -36,8 +71,7 @@ ELT (Extract, Load, Transform)
 - **Table**: physical representations of data that are created and stored in the database
 - **Incremental**: a powerful feature of dbt that allow for efficient updates to existing tables. reducing the need for full data refreshes.
 
-## Loading/Reloading the data
-In case you totally forgot how this was done tin the first place (I did) and at this point I only have the green taxi data in my local postgres db.
+
 
 
 
