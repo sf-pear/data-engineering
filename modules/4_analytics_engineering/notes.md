@@ -18,6 +18,13 @@ ELT (Extract, Load, Transform)
 - This means the we don't focus in not having redundant data ([3NF](https://www.geeksforgeeks.org/third-normal-form-3nf/))  
 - Other approaches: [Bill Inmon](https://www.astera.com/type/blog/data-warehouse-concepts/), [Data vault](https://www.databricks.com/glossary/data-vault)
 
+## Materializations
+
+- **Ephemeral**: don't get saved into disk, they only exist for the duration of the dbt run
+- **View**: virtual tables created by dbt that cen be queried like regular tables
+- **Table**: physical representations of data that are created and stored in the database
+- **Incremental**: a powerful feature of dbt that allow for efficient updates to existing tables. reducing the need for full data refreshes.
+
 # DBT set up
 
 If taxi data is not loaded into the db, do this first.
@@ -42,6 +49,12 @@ SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2019`;
 
 INSERT INTO `enhanced-bonito-411221.taxi_data.green_tripdata`
 SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2020`;
+
+-- lookup table
+CREATE TABLE `enhanced-bonito-411221.taxi_data.taxi_zone_lookup` AS
+SELECT * FROM `bigquery-public-data.new_york_taxi_trips.taxi_zone_geom`
+
+--
 ```
 
 where:
@@ -64,14 +77,5 @@ To start the dbt project in dbt Cloud, all you have to do is select BigQuery as 
 - Run `dbt init` and follow the prompts to set up the starter project
 - Run `dbt debug` to check everything is working.
 
-## Materializations
-
-- **Ephemeral**: don't get saved into disk, they only exist for the duration of the dbt run
-- **View**: virtual tables created by dbt that cen be queried like regular tables
-- **Table**: physical representations of data that are created and stored in the database
-- **Incremental**: a powerful feature of dbt that allow for efficient updates to existing tables. reducing the need for full data refreshes.
-
-
-
-
-
+## Building dbt models
+..
